@@ -123,9 +123,10 @@ export default {
     },
     getWindowSize() {
         let windowSize = {}
-        windowSize.width = document.documentElement.clientWidth || document.body.clientWidth
-        windowSize.height = document.documentElement.clientHeight || document.body.clientHeight
-        console.log('getWindowSize', windowSize)
+        if(process.client) {
+            windowSize.width = document.documentElement.clientWidth || document.body.clientWidth
+            windowSize.height = document.documentElement.clientHeight || document.body.clientHeight
+        }
         return windowSize
     },
     addHttp(url){

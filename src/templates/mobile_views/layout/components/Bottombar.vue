@@ -1,24 +1,10 @@
 <template>
     <div>
-        <van-tabbar>
-            <!-- <van-tabbar-item
-                :key="item.path" :icon="item.meta.icon">
-                <g-link :to="item.path">{{item.meta.title}}</g-link>
-            </van-tabbar-item> -->
-            <div class="van-tabbar-item"  
-            v-for="(item, index) in constantRouterMap" v-if="item.meta&&item.meta.type=='mobile'&&(token||!item.meta.LoginRequired)&&(!mini||!item.meta.mini)"
-            :key="item.path"  
-            :class="{'van-tabbar-item--active': active == index}"
-            @click="activeTab(item, index)">
-                <!-- <g-link :to="item.path"> -->
-                    <div class="van-tabbar-item__icon">
-                        <i class="van-icon " :class="'van-icon-'+item.meta.icon"></i>
-                    </div>
-                    <div class="van-tabbar-item__text">
-                        {{item.meta.title}}
-                    </div>
-                <!-- </g-link> -->
-            </div> 
+        <van-tabbar v-model="active" @before-change="beforeChange">
+            <van-tabbar-item v-for="(item, index) in constantRouterMap" v-if="item.meta&&item.meta.type=='mobile'&&(token||!item.meta.LoginRequired)&&(!mini||!item.meta.mini)"
+                :key="item.path" :to="item.path" :icon="item.meta.icon" @click="tabClick(index)">
+                {{item.meta.title}}
+            </van-tabbar-item>
         </van-tabbar>
     </div>
 </template>
@@ -30,38 +16,33 @@
         data() {
             return {
                 constantRouterMap,
-                active: sessionStorage.getItem('bottomBarActiveIndex') || '10',
+                active: 0
             }
         },
         computed: {
             ...mapGetters([
                 'token',
                 'githubUsername',
-                'mini'
+                'mini',
+                'activeIndex'
             ])
         },
         watch: {
             'active': function () {
-                // this.$router.push(this.active).catch(err => {})
+                // this.$router.push(this.active)
             }
         },
         methods: {
-            activeTab(item, index) {
-                this.active = index
-                sessionStorage.setItem('bottomBarActiveIndex', index)
-                this.$router.push(item.path)
+            tabClick(index) {
+                this.$store.commit('SET_ACTIVE', Number(index)-10)
             },
             onSelect() {
-                // this.$router.push(this.active).catch(err => {})
+                // this.$router.push(this.active)
             }
+        },
+        mounted() {
+            console.log(this.activeIndex)
+            this.active = this.activeIndex
         }
     }
 </script>
-<style>
-.van-tabbar-item a{
-    color: unset;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-}
-</style>
