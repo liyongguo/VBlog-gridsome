@@ -21,6 +21,10 @@ module.exports = function (api) {
   api.createPages(({ createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
     createPage({
+      path: '/user/new',
+      component: './src/pages/user/new/Main.vue'
+    });
+    createPage({
       path: '/user/new/main',
       component: './src/pages/user/new/Main.vue'
     });
@@ -83,6 +87,39 @@ module.exports = function (api) {
     createPage({
       path: '/user/readme/main',
       component: './src/pages/user/readme/Main.vue'
+    });
+    // mobile
+    createPage({
+      path: '/mobile/user/blog',
+      component: './src/templates/mobile_views/blog/Main.vue'
+    });
+    createPage({
+      path: '/mobile/user/blog/main',
+      component: './src/templates/mobile_views/blog/Main.vue'
+    });
+    createPage({
+      path: '/mobile/user/blog/details/:id',
+      component: './src/templates/mobile_views/blog/Details.vue'
+    });
+    createPage({
+      path: '/mobile/user/project',
+      component: './src/templates/mobile_views/project/Main.vue'
+    });
+    createPage({
+      path: '/mobile/user/project/main',
+      component: './src/templates/mobile_views/project/Main.vue'
+    });
+    createPage({
+      path: '/mobile/user/project/details/:name',
+      component: './src/templates/mobile_views/project/Details.vue'
+    });
+    createPage({
+      path: '/mobile/user/self',
+      component: './src/templates/mobile_views/self/Main.vue'
+    });
+    createPage({
+      path: '/mobile/user/self/main',
+      component: './src/templates/mobile_views/self/Main.vue'
     });
   })
 }
