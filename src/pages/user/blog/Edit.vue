@@ -10,8 +10,10 @@
                     <el-input v-model="form.description" type="textarea"></el-input>
                 </el-form-item>
                 <el-form-item label="博客正文" prop="content">
+                    <ClientOnly>
                     <mavon-editor @imgAdd="imgAdd" style="max-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars"
                     />
+                    </ClientOnly>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit" :loading="submitButton.loading" :disabled="submitButton.disabled">修改</el-button>
